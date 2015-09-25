@@ -34,7 +34,26 @@ pub enum Here {}
 pub struct There<T>(std::marker::PhantomData<T>);
 
 
-
+/// `Find<T, I>` is implemented for an `HList` if index `I` of the `HList` is a `T`
+///
+/// Rust's type inferencer can often produce a correct `I`
+/// if there is exactly one `T` in the `HList`.
+///
+/// ```rust
+/// use hlist::{HList, Nil, Find};
+///
+/// // The type of list is Cons<i64, Cons<i32, Nil>>
+/// let list = Nil.push(0i32).push(1i64);
+///
+/// // Here list satisfies the trait Find<i64, Here>.
+/// // The compiler infers the second type parameter.
+/// let a: i64 = *list.get();
+/// assert!(a == 1);
+///
+/// // Here list satisfies the trait Find<i32, There<Here>>.
+/// let b: i32 = *list.get(); 
+/// assert!(b == 0);
+/// ```
 pub trait Find<T, I> {
     fn get(&self) -> &T;
     fn get_mut(&mut self) -> &mut T;
