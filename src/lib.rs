@@ -32,8 +32,8 @@ impl<T, Tail> Find<T, Here> for Cons<T, Tail> {
     }
 }
 
-impl<Head, T, Tail, TailI> Find<T, There<TailI>> for Cons<Head, Tail>
-    where Tail: Find<T, TailI> {
+impl<Head, T, Tail, TailIndex> Find<T, There<TailIndex>> for Cons<Head, Tail>
+    where Tail: Find<T, TailIndex> {
     fn get(&self) -> &T {
         self.1.get()
     }
