@@ -1,7 +1,12 @@
+
+/// The empty `HList`.
 pub struct Nil;
+
+/// An `HList` with `H` at position 0, and `T` as the rest of the list.
 pub struct Cons<H, T>(pub H, pub T);
 
 pub trait HList: Sized {
+    /// Consumes the `HList`, and returns a new HList with `item` at the beginning.
     fn push<N>(self, item: N) -> Cons<N, Self> {
         Cons(item, self)
     }
