@@ -2,3 +2,6 @@
 name = "hlist"
 version = "0.1.0"
 authors = ["Sgeo <sgeoster@gmail.com>"]
+license = "MIT"
+homepage = "https://github.com/Sgeo/hlist"
+repository = "https://github.com/Sgeo/hlist"
