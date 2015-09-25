@@ -1,6 +1,15 @@
 pub struct Nil;
 pub struct Cons<H, T>(pub H, pub T);
 
+pub trait HList: Sized {
+    fn push<N>(self, item: N) -> Cons<N, Self> {
+        Cons(item, self)
+    }
+}
+
+impl HList for Nil {}
+impl<H, T> HList for Cons<H, T> {}
+
 
 /// Used as an index into an `HList`.
 ///
@@ -20,17 +29,6 @@ pub enum Here {}
 pub struct There<T>(std::marker::PhantomData<T>);
 
 
-impl Nil {
-    pub fn push<N>(self, item: N) -> Cons<N, Self> {
-        Cons(item, self)
-    }
-}
-
-impl<H, T> Cons<H, T> {
-    pub fn push<N>(self, item: N) -> Cons<N, Self> {
-        Cons(item, self)
-    }
-}
 
 pub trait Find<T, I> {
     fn get(&self) -> &T;
