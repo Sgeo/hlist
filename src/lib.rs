@@ -1,10 +1,24 @@
 pub struct Nil;
 pub struct Cons<H, T>(pub H, pub T);
 
+
+/// Used as an index into an `HList`.
+///
+/// `Here` is 0, pointing to the head of the HList.
+///
+/// Users should normally allow type inference to deal with this type
 #[allow(dead_code)]
 pub enum Here {}
+
+
+/// Used as an index into an `HList`.
+///
+/// `There<T>` is 1 + `T`.
+///
+/// Users should normally allow type inference to deal with this type.
 #[allow(dead_code)]
 pub struct There<T>(std::marker::PhantomData<T>);
+
 
 impl Nil {
     pub fn push<N>(self, item: N) -> Cons<N, Self> {
