@@ -1,4 +1,6 @@
 
+#![warn(missing_docs)]
+
 /// The empty `HList`.
 pub struct Nil;
 
