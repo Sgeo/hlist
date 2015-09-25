@@ -61,3 +61,12 @@ fn test_get_mut() {
     assert!(a == 6i32);
     assert!(b == "Bar");
 }
+
+#[test]
+fn test_index_as_type_parameter() {
+    fn foo<I, L: Find<i32, I>>(list: &L) -> i32 {
+        *list.get()
+    }
+    let list = Nil.push("foo").push(5i32).push("bar");
+    assert!(foo(&list) == 5);
+}
