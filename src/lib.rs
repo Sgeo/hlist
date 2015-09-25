@@ -43,5 +43,21 @@ impl<Head, T, Tail, TailI> Find<T, There<TailI>> for Cons<Head, Tail>
 }
 
 #[test]
-fn it_works() {
+fn test_get() {
+    let list = Nil.push(5i32).push("Foo");
+    let a: i32 = *list.get();
+    let b: &str = *list.get();
+    assert!(a == 5i32);
+    assert!(b == "Foo");
+}
+
+#[test]
+fn test_get_mut() {
+    let mut list = Nil.push(5i32).push("Foo");
+    *list.get_mut() = 6i32;
+    *list.get_mut() = "Bar";
+    let a: i32 = *list.get();
+    let b: &str = *list.get();
+    assert!(a == 6i32);
+    assert!(b == "Bar");
 }
