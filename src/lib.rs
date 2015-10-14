@@ -72,7 +72,7 @@ pub struct There<T>(std::marker::PhantomData<T>);
 /// }
 /// let list = Nil.push("foo").push(5i32).push("bar");
 /// assert!(foo(&list) == 5);
-/// ```rust
+/// ```
 /// 
 /// When `foo()` is called, the compiler figures out the appropriate value for `I`.
 pub trait Find<T, I> {
