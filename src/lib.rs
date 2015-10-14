@@ -76,8 +76,10 @@ pub struct There<T>(std::marker::PhantomData<T>);
 /// 
 /// When `foo()` is called, the compiler figures out the appropriate value for `I`.
 pub trait Find<T, I> {
-    /// Retrieves a &T.
-    /// Allows for type inferencing to act like type-directed search
+    /// Retrieves a `&T`.
+    ///
+    /// Allows for type inferencing to act like type-directed search.
+    ///
     /// ```rust
     /// use hlist::{HList, Nil, Find}
     ///
@@ -86,8 +88,10 @@ pub trait Find<T, I> {
     /// assert!(a == 1);
     fn get(&self) -> &T;
     
-    /// Retrieves a &mut T.
-    /// Allows for type inferencing to act like type-directed search
+    /// Retrieves a `&mut T`.
+    ///
+    /// Allows for type inferencing to act like type-directed search.
+    ///
     /// ```rust
     /// use hlist::{HList, Nil, Find}
     ///
