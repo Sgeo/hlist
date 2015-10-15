@@ -67,6 +67,8 @@ pub struct There<T>(std::marker::PhantomData<T>);
 /// Functions that need to look up values of a type in an HList given to them should get the index from the call site:
 ///
 /// ```rust
+/// use hlist::{HList, Nil, Find};
+///
 /// fn foo<I, L: Find<i32, I>>(list: &L) -> i32 {
 ///     *list.get()
 /// }
@@ -81,7 +83,7 @@ pub trait Find<T, I> {
     /// Allows for type inferencing to act like type-directed search.
     ///
     /// ```rust
-    /// use hlist::{HList, Nil, Find}
+    /// use hlist::{HList, Nil, Find};
     ///
     /// let list = Nil.push(0i32).push(1i64);
     /// let a: i64 = *list.get();
@@ -93,11 +95,11 @@ pub trait Find<T, I> {
     /// Allows for type inferencing to act like type-directed search.
     ///
     /// ```rust
-    /// use hlist::{HList, Nil, Find}
+    /// use hlist::{HList, Nil, Find};
     ///
     /// let mut list = Nil.push(0i32).push(1i64);
     /// *list.get_mut() = 5i32;
-    /// let a: i32 = *list.get()
+    /// let a: i32 = *list.get();
     /// assert!(a == 5);
     fn get_mut(&mut self) -> &mut T;
 }
