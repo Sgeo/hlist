@@ -5,6 +5,8 @@
 //! The types in the list are present in the type of the list, so that `Cons<i32, Cons<i64, Nil>>` contains an `i32` and an `i64`.
 //! If type `T` is present exactly once in an `HList`, it is usually possible to allow the compiler to find the `T` in the `HList` by using the `Find` trait.
 
+use std::ops::Add;
+
 /// The empty `HList`.
 pub struct Nil;
 
@@ -123,6 +125,23 @@ impl<Head, T, Tail, TailIndex> Find<T, There<TailIndex>> for Cons<Head, Tail>
     }
 }
 
+impl<RHS> Add<RHS> for Nil {
+    type Output = RHS;
+    
+    fn add(self, rhs: RHS) -> RHS {
+        rhs
+    }
+}
+
+impl<H, T, RHS> Add<RHS> for Cons<H, T>
+    where T: Add<RHS> {
+    type Output = Cons<H, <T as Add<RHS>>::Output>;
+    
+    fn add(self, rhs: RHS) -> Self::Output {
+        Cons(self.0, self.1 + rhs)
+    }
+}
+
 #[test]
 fn test_get() {
     let list = Nil.push(5i32).push("Foo");
@@ -150,4 +169,15 @@ fn test_index_as_type_parameter() {
     }
     let list = Nil.push("foo").push(5i32).push("bar");
     assert!(foo(&list) == 5);
+}
+
+#[test]
+fn test_hlist_addition() {
+    let list_1 = Nil.push(0i32);
+    let list_2 = Nil.push("Foo");
+    let list_3 = list_1 + list_2;
+    let a: i32 = *list_3.get();
+    let b: &str = *list_3.get();
+    assert!(a == 0i32);
+    assert!(b == "Foo");
 }
