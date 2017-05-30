@@ -7,3 +7,12 @@ homepage = "https://github.com/Sgeo/hlist"
 repository = "https://github.com/Sgeo/hlist"
 description = "Heterogeneous list with type-directed search"
 documentation = "http://sgeo.github.io/rustdoc/hlist/"
+
+[dependencies]
+serde = { version = "^1.0", optional = true }
+serde_derive = { version = "^1.0", optional = true }
+
+[features]
+default = ["with_serde"]
+
+with_serde = ["serde", "serde_derive"]
