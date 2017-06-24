@@ -1,16 +1,23 @@
-
 #![warn(missing_docs)]
 
 //! This crate provides types `Nil` and `Cons<H, T>`, which together allow for creating lists consisting of multiple types.
 //! The types in the list are present in the type of the list, so that `Cons<i32, Cons<i64, Nil>>` contains an `i32` and an `i64`.
 //! If type `T` is present exactly once in an `HList`, it is usually possible to allow the compiler to find the `T` in the `HList` by using the `Find` trait.
 
+#[cfg(feature = "with_serde")]
+#[macro_use]
+extern crate serde_derive;
+
 use std::ops::Add;
 
 /// The empty `HList`.
+#[derive(Clone, Copy, Debug)]
+#[cfg_attr(feature = "with_serde", derive(Serialize, Deserialize))]
 pub struct Nil;
 
 /// An `HList` with `H` at position 0, and `T` as the rest of the list.
+#[derive(Clone, Copy, Debug)]
+#[cfg_attr(feature = "with_serde", derive(Serialize, Deserialize))]
 pub struct Cons<H, T>(pub H, pub T);
 
 /// A marker trait that `Nil` and `Cons<H, T>` satisfies.
