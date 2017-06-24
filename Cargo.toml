@@ -1,12 +1,12 @@
 [package]
 name = "hlist"
-version = "0.2.0-alpha"
+version = "0.1.1"
 authors = ["Sgeo <sgeoster@gmail.com>"]
 license = "MIT"
 homepage = "https://github.com/Sgeo/hlist"
 repository = "https://github.com/Sgeo/hlist"
 description = "Heterogeneous list with type-directed search"
-documentation = "http://sgeo.github.io/rustdoc/hlist/"
+documentation = "https://docs.rs/hlist/0.1.1/"
 
 [dependencies]
 serde = { version = "^1.0", optional = true }
