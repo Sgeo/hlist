@@ -11,12 +11,12 @@ extern crate serde_derive;
 use std::ops::Add;
 
 /// The empty `HList`.
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Default)]
 #[cfg_attr(feature = "with_serde", derive(Serialize, Deserialize))]
 pub struct Nil;
 
 /// An `HList` with `H` at position 0, and `T` as the rest of the list.
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Default)]
 #[cfg_attr(feature = "with_serde", derive(Serialize, Deserialize))]
 pub struct Cons<H, T>(pub H, pub T);
 
